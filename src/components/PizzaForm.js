@@ -1,6 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+const noPizza = {
+  name: "",
+  topping: "",
+  vegetarian: false,
+};
+function PizzaForm({ pizzaId }) {
+  const [formData, setFormData] = useState(noPizza);
+  const { topping, vegetarian, size } = formData;
 
-function PizzaForm() {
+  useEffect(() => {
+    if (pizzaId !== 0) {
+      fetch(`http://localhost:3001/pizzas/${pizzaId}`)
+        .then((r) => r.json())
+        .then((pizza) => setFormData(pizza));
+    } else {
+      setFormData(noPizza);
+    }
+  }, [pizzaId]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
   return (
     <form onSubmit={null /*handle that submit*/}>
       <div className="form-row">
@@ -9,11 +30,18 @@ function PizzaForm() {
             className="form-control"
             type="text"
             name="topping"
+            value={topping}
+            onChange={handleChange}
             placeholder="Pizza Topping"
           />
         </div>
         <div className="col">
-          <select className="form-control" name="size">
+          <select
+            className="form-control"
+            name="size"
+            value={size}
+            onChange={handleChange}
+          >
             <option value="Small">Small</option>
             <option value="Medium">Medium</option>
             <option value="Large">Large</option>

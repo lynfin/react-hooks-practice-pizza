@@ -27,7 +27,7 @@ function App() {
   return (
     <>
       <Header />
-      <PizzaForm />
+      <PizzaForm pizzaId={pizzaToModify} />
       <PizzaList pizzas={pizzas} onModifyPizza={handleModifyPizza} />
     </>
   );
