@@ -7,6 +7,8 @@ const noPizza = {
 function PizzaForm({ pizzaId }) {
   const [formData, setFormData] = useState(noPizza);
   const { topping, vegetarian, size } = formData;
+  //vegetarian = true => selectedOption: 'Vegetarian'
+  //vegetarian = false => selectedOption: 'Not Vegetarian'
 
   useEffect(() => {
     if (pizzaId !== 0) {
@@ -20,8 +22,12 @@ function PizzaForm({ pizzaId }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const isVegetarian = value === "Vegetarian" ? true : false;
+    const newValue = name === "vegetarian" ? isVegetarian : value;
+    //console.log(`Setting ${name} to ${newValue}`);
+    setFormData({ ...formData, [name]: newValue });
   };
+
   return (
     <form onSubmit={null /*handle that submit*/}>
       <div className="form-row">
@@ -54,6 +60,8 @@ function PizzaForm({ pizzaId }) {
               type="radio"
               name="vegetarian"
               value="Vegetarian"
+              checked={vegetarian}
+              onChange={handleChange}
             />
             <label className="form-check-label">Vegetarian</label>
           </div>
@@ -63,6 +71,8 @@ function PizzaForm({ pizzaId }) {
               type="radio"
               name="vegetarian"
               value="Not Vegetarian"
+              checked={!vegetarian}
+              onChange={handleChange}
             />
             <label className="form-check-label">Not Vegetarian</label>
           </div>
