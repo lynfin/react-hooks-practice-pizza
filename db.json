@@ -9,7 +9,7 @@
     {
       "id": 2,
       "topping": "Pepperoni",
-      "size": "Small",
+      "size": "Large",
       "vegetarian": false
     },
     {
@@ -28,7 +28,7 @@
       "id": 5,
       "topping": "Bacon",
       "size": "Medium",
-      "vegetarian": false
+      "vegetarian": true
     },
     {
       "id": 6,

@@ -24,10 +24,15 @@ function App() {
     setPizzaToModify(id);
   };
 
+  const handleUpdatedPizza = (newPizza) => {
+    setPizzas(
+      pizzas.map((pizza) => (pizza.id === newPizza.id ? newPizza : pizza))
+    );
+  };
   return (
     <>
       <Header />
-      <PizzaForm pizzaId={pizzaToModify} />
+      <PizzaForm pizzaId={pizzaToModify} onUpdatePizza={handleUpdatedPizza} />
       <PizzaList pizzas={pizzas} onModifyPizza={handleModifyPizza} />
     </>
   );

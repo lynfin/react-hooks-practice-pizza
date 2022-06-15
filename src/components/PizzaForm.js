@@ -4,7 +4,7 @@ const noPizza = {
   topping: "",
   vegetarian: false,
 };
-function PizzaForm({ pizzaId }) {
+function PizzaForm({ pizzaId, onUpdatePizza }) {
   const [formData, setFormData] = useState(noPizza);
   const { topping, vegetarian, size } = formData;
   //vegetarian = true => selectedOption: 'Vegetarian'
@@ -39,7 +39,7 @@ function PizzaForm({ pizzaId }) {
       body: JSON.stringify(formData),
     })
       .then((r) => r.json())
-      .then((updatedPizza) => console.log(updatedPizza));
+      .then((updatedPizza) => onUpdatePizza(updatedPizza));
   };
 
   return (
