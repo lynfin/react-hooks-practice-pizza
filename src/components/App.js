@@ -12,18 +12,23 @@ import PizzaList from "./PizzaList";
 
 function App() {
   const [pizzas, setPizzas] = useState([]);
+  const [pizzaToModify, setPizzaToModify] = useState(0);
 
   useEffect(() => {
     fetch("http://localhost:3001/pizzas")
       .then((r) => r.json())
       .then((pizzas) => setPizzas(pizzas));
   }, []);
-  console.log("Pizza count", pizzas.length);
+
+  const handleModifyPizza = (id) => {
+    setPizzaToModify(id);
+  };
+
   return (
     <>
       <Header />
       <PizzaForm />
-      <PizzaList pizzas={pizzas} />
+      <PizzaList pizzas={pizzas} onModifyPizza={handleModifyPizza} />
     </>
   );
 }
