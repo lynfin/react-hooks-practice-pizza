@@ -28,8 +28,22 @@ function PizzaForm({ pizzaId }) {
     setFormData({ ...formData, [name]: newValue });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    fetch(`http://localhost:3001/pizzas/${pizzaId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((r) => r.json())
+      .then((updatedPizza) => console.log(updatedPizza));
+  };
+
   return (
-    <form onSubmit={null /*handle that submit*/}>
+    <form onSubmit={handleSubmit}>
       <div className="form-row">
         <div className="col-5">
           <input
